@@ -1,4 +1,4 @@
-#NJC Bandwidth
+# NJC Bandwidth
 
 Welcome to the **NJC Bandwidth** frontend repository! This project is built using modern web development practices with React. Below you will find all the necessary steps to get started, run the development server, build for production, and troubleshoot common issues.
 
