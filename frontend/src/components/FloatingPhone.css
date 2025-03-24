@@ -1,0 +1,634 @@
+/* 
+  ----------------------------------------------------
+  Floating Phone Container & Glow Ring
+  ----------------------------------------------------
+*/
+.global-floating-phone {
+  position: fixed;
+  top: 15%;
+  right: 5%;
+  width: 280px;
+  height: 550px;
+  z-index: 100;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.phone-glow-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 500px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(142, 45, 226, 0.4) 0%,
+    rgba(74, 0, 224, 0.1) 60%,
+    transparent 100%
+  );
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: -1;
+  animation: pulsateRing 6s infinite alternate;
+}
+
+@keyframes pulsateRing {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+.phone-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+/* 
+  ----------------------------------------------------
+  The Phone Device & Screen
+  ----------------------------------------------------
+*/
+.phone-device {
+  position: absolute;
+  width: 250px;
+  height: 500px;
+  background: linear-gradient(135deg, #1b1b1b, #3a3a3a);
+  border-radius: 36px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 6px rgba(255, 255, 255, 0.05),
+    inset 0 0 10px rgba(0, 0, 0, 0.6);
+  transform-style: preserve-3d;
+}
+
+.phone-camera {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle, #000 20%, #444 80%);
+  border-radius: 50%;
+  box-shadow:
+    0 0 4px rgba(255, 255, 255, 0.4),
+    inset 0 0 2px rgba(255, 255, 255, 0.3);
+  z-index: 11;
+}
+
+.phone-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 30px;
+  background-color: #111;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  z-index: 10;
+}
+
+.phone-screen {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  background: linear-gradient(135deg, #060820, #0a0e29);
+  border-radius: 26px;
+  overflow: hidden;
+  animation: screen-glow 4s infinite alternate;
+}
+
+@keyframes screen-glow {
+  0% {
+    box-shadow: inset 0 0 10px rgba(74, 0, 224, 0.3);
+  }
+  100% {
+    box-shadow: inset 0 0 20px rgba(142, 45, 226, 0.4);
+  }
+}
+
+.screen-content {
+  width: 100%;
+  height: 100%;
+  padding: 35px 12px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  overflow: hidden;
+  background: radial-gradient(
+    circle at center,
+    rgba(74, 0, 224, 0.05) 0%,
+    rgba(10, 14, 41, 0) 70%
+  );
+}
+
+/* 
+  ----------------------------------------------------
+  NEW: Marketing Banner
+  ----------------------------------------------------
+*/
+.phone-banner {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 10px 15px;
+  text-align: center;
+  animation: bannerSlideDown 0.8s ease forwards;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes bannerSlideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.banner-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+  background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #F472B6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.banner-subtitle {
+  font-size: 0.8rem;
+  color: #ccc;
+  margin-bottom: 10px;
+}
+
+.banner-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.banner-cta {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+}
+
+.join-now {
+  background: linear-gradient(45deg, #4A00E0, #8E2DE2);
+  color: #fff;
+}
+
+.join-now:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(142, 45, 226, 0.4);
+}
+
+.learn-more {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.learn-more:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.3);
+}
+
+/* 
+  ----------------------------------------------------
+  App Icons
+  ----------------------------------------------------
+*/
+.app-icons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 15px;
+  transition: all 0.5s ease;
+}
+
+.app-icon {
+  aspect-ratio: 1;
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.app-icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+  z-index: 2;
+}
+
+/* Icon color gradients */
+.icon-1 {
+  background: linear-gradient(45deg, #FF416C, #FF4B2B);
+}
+.icon-2 {
+  background: linear-gradient(45deg, #4A00E0, #8E2DE2);
+}
+.icon-3 {
+  background: linear-gradient(45deg, #11998e, #38ef7d);
+}
+.icon-4 {
+  background: linear-gradient(45deg, #FFC837, #FF8008);
+}
+.icon-5 {
+  background: linear-gradient(45deg, #6A11CB, #2575FC);
+}
+.icon-6 {
+  background: linear-gradient(45deg, #fc4a1a, #f7b733);
+}
+.icon-7 {
+  background: linear-gradient(45deg, #00c6ff, #0072ff);
+}
+.icon-8 {
+  background: linear-gradient(45deg, #f12711, #f5af19);
+}
+
+/* Which icons animate depending on the section */
+.app-icons[data-section="hero"] .app-icon {
+  animation: pulse 2s infinite alternate;
+  animation-delay: calc(var(--index, 0) * 0.2s);
+}
+.app-icons[data-section="about"] .app-icon {
+  animation: rotate 3s infinite alternate;
+  animation-delay: calc(var(--index, 0) * 0.15s);
+}
+.app-icons[data-section="referrals"] .app-icon {
+  animation: bounce 2s infinite alternate;
+  animation-delay: calc(var(--index, 0) * 0.1s);
+}
+.app-icons[data-section="marketplace"] .app-icon {
+  animation: scale 2.5s infinite alternate;
+  animation-delay: calc(var(--index, 0) * 0.12s);
+}
+.app-icons[data-section="contact"] .app-icon {
+  animation: shake 2s infinite alternate;
+  animation-delay: calc(var(--index, 0) * 0.08s);
+}
+
+.app-icons .icon-1 { --index: 1; }
+.app-icons .icon-2 { --index: 2; }
+.app-icons .icon-3 { --index: 3; }
+.app-icons .icon-4 { --index: 4; }
+.app-icons .icon-5 { --index: 5; }
+.app-icons .icon-6 { --index: 6; }
+.app-icons .icon-7 { --index: 7; }
+.app-icons .icon-8 { --index: 8; }
+
+/* Keyframes for icons */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
+}
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(10deg); }
+}
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-5px); }
+}
+@keyframes scale {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.9); }
+  100% { transform: scale(1.05); }
+}
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  50% { transform: translateX(0); }
+  75% { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}
+
+/* 
+  ----------------------------------------------------
+  Notification + Referral
+  ----------------------------------------------------
+*/
+.phone-notification {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.notification-icon {
+  font-size: 1.8rem;
+  background: linear-gradient(45deg, #FFD700, #FFC107);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(255, 215, 0, 0.3));
+}
+
+.notification-content {
+  flex: 1;
+}
+
+.notification-title {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 5px;
+}
+
+.notification-text {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.phone-referral {
+  background: linear-gradient(
+    45deg,
+    rgba(74, 0, 224, 0.2),
+    rgba(142, 45, 226, 0.2)
+  );
+  border-radius: 16px;
+  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.referral-title {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.referral-link {
+  font-size: 0.8rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: #8E2DE2;
+  margin-bottom: 10px;
+  font-family: monospace;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.referral-share {
+  font-size: 0.8rem;
+  background: linear-gradient(45deg, #4A00E0, #8E2DE2);
+  display: inline-block;
+  padding: 8px 15px;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 5px 15px rgba(74, 0, 224, 0.3);
+  animation: pulse 2s infinite;
+}
+
+/* 
+  ----------------------------------------------------
+  Button, Reflection, Shadow
+  ----------------------------------------------------
+*/
+.phone-button {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.phone-reflection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 40%
+  );
+  pointer-events: none;
+  border-radius: 36px;
+}
+
+.phone-shadow {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  filter: blur(20px);
+  animation: shadow-pulse 5s infinite alternate;
+}
+
+@keyframes shadow-pulse {
+  0% {
+    transform: translateX(-50%) scale(1);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateX(-50%) scale(1.1);
+    opacity: 0.4;
+  }
+}
+
+/* 
+  ----------------------------------------------------
+  Section-based phone positions
+  ----------------------------------------------------
+*/
+.global-floating-phone.in-hero {
+  right: 5%;
+}
+.global-floating-phone.in-about {
+  right: 25%;
+}
+.global-floating-phone.in-referrals {
+  right: 40%;
+}
+.global-floating-phone.in-marketplace {
+  right: 55%;
+}
+.global-floating-phone.in-contact {
+  right: 65%;
+}
+
+/* 
+  ----------------------------------------------------
+  Responsive Adjustments
+  ----------------------------------------------------
+*/
+@media (max-width: 1400px) {
+  .global-floating-phone {
+    transform: scale(0.9);
+    right: 3%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .global-floating-phone {
+    transform: scale(0.8);
+    top: 10%;
+    right: 2%;
+  }
+  .global-floating-phone.in-about {
+    right: 15%;
+  }
+  .global-floating-phone.in-referrals {
+    right: 30%;
+  }
+  .global-floating-phone.in-marketplace,
+  .global-floating-phone.in-contact {
+    right: 45%;
+  }
+}
+
+@media (max-width: 992px) {
+  .global-floating-phone {
+    transform: scale(0.7);
+    top: 8%;
+    right: 0;
+  }
+  .global-floating-phone.in-about,
+  .global-floating-phone.in-referrals,
+  .global-floating-phone.in-marketplace,
+  .global-floating-phone.in-contact {
+    right: 15%;
+  }
+}
+
+@media (max-width: 768px) {
+  .global-floating-phone {
+    width: 200px;
+    height: 400px;
+    transform: scale(0.6);
+    top: 5%;
+    right: -5%;
+  }
+  .phone-device {
+    width: 200px;
+    height: 400px;
+  }
+  .global-floating-phone.in-about,
+  .global-floating-phone.in-referrals,
+  .global-floating-phone.in-marketplace,
+  .global-floating-phone.in-contact {
+    right: 0;
+  }
+  .app-icons {
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .phone-notification,
+  .phone-referral {
+    padding: 10px;
+  }
+  .notification-icon {
+    font-size: 1.5rem;
+  }
+  .banner-title {
+    font-size: 0.9rem;
+  }
+  .banner-subtitle {
+    font-size: 0.75rem;
+  }
+  .banner-cta {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .global-floating-phone {
+    width: 160px;
+    height: 320px;
+    transform: scale(0.5);
+    top: 3%;
+    right: -10%;
+  }
+  .phone-device {
+    width: 160px;
+    height: 320px;
+  }
+  .screen-content {
+    padding: 30px 8px 15px;
+    gap: 8px;
+  }
+  .app-icons {
+    gap: 5px;
+    margin-bottom: 8px;
+  }
+  .notification-icon {
+    font-size: 1.3rem;
+  }
+  .notification-title,
+  .referral-title {
+    font-size: 0.8rem;
+  }
+  .notification-text,
+  .referral-link,
+  .referral-share {
+    font-size: 0.7rem;
+  }
+  .phone-button {
+    bottom: 15px;
+    width: 40px;
+    height: 4px;
+  }
+}
+
+.global-floating-phone.phone-in-referral-rewards {
+  position: fixed !important; 
+  top: 10% !important;
+  left: 2% !important;
+  right: auto !important;
+  transform: scale(0.5) !important;
+  z-index: 9999 !important;
+  transition: transform 0.8s ease, left 0.8s ease, top 0.8s ease;
+}

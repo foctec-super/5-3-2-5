@@ -1,0 +1,639 @@
+/************************************************************
+  GLOBAL THEME & VARIABLES
+*************************************************************/
+:root {
+  --dark-color: #1f1f2e;
+  --primary-gradient: linear-gradient(135deg, #60A5FA, #A78BFA);
+  --primary-color: #4a00e0;
+  --error-color: #f87171;
+}
+
+/************************************************************
+  PAGE LAYOUT
+*************************************************************/
+.auth-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  background-color: var(--dark-color);
+  overflow: hidden;
+}
+
+/* 
+  Left column: small 3D model up top, then text below 
+*/
+.auth-left {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 2rem;
+  gap: 1.5rem;
+}
+
+/* The container holding the smaller sphere */
+.model-container {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+/************************************************************
+  RIGHT COLUMN: The login form or register form
+*************************************************************/
+.auth-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+/************************************************************
+  DETAILS TEXT ON THE LEFT
+*************************************************************/
+.details-text {
+  color: #eee;
+  max-width: 400px;
+  margin-top: 1rem;
+  line-height: 1.6;
+  animation: fadeInUp 1s ease forwards;
+  opacity: 0; /* start hidden for animation */
+}
+
+.details-title {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: #fff;
+  font-weight: 700;
+}
+
+.details-paragraph {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #ccc;
+}
+
+.auth-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-feature {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: #ccc;
+}
+
+.feature-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 1.3rem;
+}
+
+.feature-text {
+  color: #ddd;
+  font-weight: 500;
+}
+
+/************************************************************
+  FORM CONTAINER STYLES (LOGIN SHARED)
+*************************************************************/
+.auth-form-container {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  position: relative;
+  animation: fadeIn 1s ease forwards;
+  opacity: 0;
+}
+
+.auth-form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.gradient-text {
+  font-size: 2rem;
+  font-weight: 700;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: #aaa;
+  font-size: 0.95rem;
+}
+
+.auth-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/************************************************************
+  INPUT GROUPS (LOGIN)
+*************************************************************/
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  left: 0.75rem;
+  transform: translateY(-50%);
+  color: #aaa;
+  font-size: 1.1rem;
+}
+
+input {
+  width: 100%;
+  padding: 0.8rem 0.8rem 0.8rem 2.5rem;
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  color: #ddd;
+  font-size: 0.95rem;
+  transition: border 0.3s;
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid #60A5FA;
+}
+
+.error {
+  border: 1px solid var(--error-color) !important;
+}
+
+.error-message {
+  color: var(--error-color);
+  font-size: 0.8rem;
+  margin-left: 0.4rem;
+}
+
+/************************************************************
+  ACTIONS & BUTTONS (LOGIN)
+*************************************************************/
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #aaa;
+  font-size: 0.85rem;
+}
+
+.forgot-link {
+  color: #60A5FA;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.forgot-link:hover {
+  color: #a78bfa;
+}
+
+.login-button {
+  width: 100%;
+  background: var(--primary-gradient);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.8rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-button.loading {
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/************************************************************
+  DIVIDER (LOGIN)
+*************************************************************/
+.divider {
+  position: relative;
+  text-align: center;
+  color: #aaa;
+  font-size: 0.8rem;
+  margin: 1rem 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}
+
+/************************************************************
+  SOCIAL LOGIN (LOGIN)
+*************************************************************/
+.social-login {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.social-button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.65rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.social-button.google {
+  background: linear-gradient(135deg, #EA4335, #FBBC05);
+}
+.social-button.apple {
+  background: linear-gradient(135deg, #000000, #333333);
+}
+
+/************************************************************
+  SIGNUP PROMPT (LOGIN)
+*************************************************************/
+.signup-prompt {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+.signup-prompt a {
+  color: #60A5FA;
+  margin-left: 0.25rem;
+  text-decoration: none;
+  transition: color 0.2s;
+  font-weight: 500;
+}
+
+.signup-prompt a:hover {
+  color: #a78bfa;
+}
+
+/************************************************************
+  ANIMATIONS (LOGIN SHARED)
+*************************************************************/
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(25px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Animate left details text in after a short delay */
+.details-text {
+  animation: fadeInUp 1s 0.3s ease forwards;
+}
+
+/************************************************************
+  RESPONSIVE (LOGIN SHARED)
+*************************************************************/
+@media (max-width: 992px) {
+  .auth-page {
+    flex-direction: column;
+  }
+
+  .auth-left {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .details-text {
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .auth-right {
+    width: 100%;
+  }
+
+  .model-container {
+    margin: 0 auto 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .details-title {
+    font-size: 1.4rem;
+  }
+  .details-paragraph {
+    font-size: 0.85rem;
+  }
+  .auth-feature {
+    font-size: 0.85rem;
+  }
+  .feature-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+}
+
+/************************************************************
+  REGISTER PAGE-SPECIFIC
+*************************************************************/
+.register-page {
+  /* You can override or add additional background or styling here if you wish */
+}
+
+.logo-container {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 50;
+}
+
+.brand-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  border: 2px solid rgba(0, 117, 255, 0.3);
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+.brand-logo:hover {
+  border-color: rgba(0, 117, 255, 0.6);
+  transform: scale(1.1);
+}
+
+.welcome-section {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.welcome-section h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #60A5FA, #A78BFA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.welcome-text {
+  font-size: 1rem;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.feature-item {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+.feature-item:hover {
+  transform: scale(1.05);
+}
+.feature-item p {
+  margin-top: 0.5rem;
+  color: #ddd;
+  font-size: 0.9rem;
+}
+
+.register-form-container {
+  width: 100%;
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.register-form-container h2 {
+  text-align: center;
+  color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.name-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  position: relative;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 0.75rem 2.5rem;
+  color: #fff;
+  font-size: 0.95rem;
+  transition: border 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #60A5FA;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* *** Updated for black text on a white dropdown *** */
+.select-input {
+  appearance: none;
+  background: #fff; 
+  color: #000; 
+  border: 1px solid #bbb;
+  padding-left: 2.5rem !important;
+}
+
+.select-input option {
+  color: #000;
+}
+
+.register-btn {
+  width: 100%;
+  background: var(--primary-gradient);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.register-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(96, 165, 250, 0.3);
+}
+
+.social-divider {
+  position: relative;
+  text-align: center;
+  color: #aaa;
+  font-size: 0.8rem;
+  margin: 1rem 0;
+}
+
+.social-divider::before,
+.social-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 35%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.social-divider::before {
+  left: 0;
+}
+.social-divider::after {
+  right: 0;
+}
+
+.social-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.social-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.65rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.social-btn.google {
+  background: linear-gradient(135deg, #EA4335, #FBBC05);
+}
+.social-btn.apple {
+  background: linear-gradient(135deg, #000000, #333333);
+}
+
+.login-link {
+  text-align: center;
+  color: #aaa;
+  font-size: 0.85rem;
+}
+
+.login-link a {
+  color: #60A5FA;
+  font-weight: 500;
+  margin-left: 0.25rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.login-link a:hover {
+  color: #a78bfa;
+}
+
+/* =============== Custom for Country Group =============== */
+.country-group {
+  margin-bottom: 0.5rem;
+}

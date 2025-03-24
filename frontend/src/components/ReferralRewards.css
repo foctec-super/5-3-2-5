@@ -1,0 +1,437 @@
+/* 
+  ----------------------------------------------
+  PARALLAX BACKGROUND + GENERAL LAYOUT
+  ----------------------------------------------
+*/
+.parallax-referral-bg {
+  /* Feel free to change the background image or gradient */
+  background: url('https://via.placeholder.com/1920x1080/111/222?text=NJC+Referral+BG')
+    no-repeat center center / cover;
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 0;
+}
+
+/* The parallax effect (make sure parent has 'position: relative;' ) */
+.parallax-referral-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  z-index: 0;
+}
+
+.referral-rewards-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Title area */
+.referral-title-wrapper {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #fff;
+}
+
+.referral-main-title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  animation: fadeInDown 1s ease forwards;
+}
+
+.referral-subtitle {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
+  animation: fadeInUp 1.2s ease forwards;
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 
+  ----------------------------------------------
+  REFERRAL CARDS (3D Flip Animation)
+  ----------------------------------------------
+*/
+.referral-cards {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 4rem;
+}
+
+.referral-card {
+  --flip-duration: 0.8s;
+  --card-width: 280px;
+  --card-height: 380px;
+
+  width: var(--card-width);
+  height: var(--card-height);
+  perspective: 1500px; /* for 3D flip */
+  border-radius: 20px;
+  overflow: visible;
+  cursor: pointer;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s;
+}
+
+.referral-card .card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform var(--flip-duration) ease;
+}
+
+.referral-card.active .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Card front */
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  backface-visibility: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background: white;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: box-shadow 0.3s;
+}
+
+.card-front {
+  /* Top border gradient: card color */
+  border-top: 10px solid var(--card-color, #4a00e0);
+}
+
+.card-back {
+  background: linear-gradient(
+    135deg,
+    var(--card-color, #4a00e0),
+    #444
+  );
+  transform: rotateY(180deg);
+  color: #fff;
+}
+
+/* Front content */
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--card-color, #4a00e0);
+  transition: transform 0.5s ease;
+}
+
+.referral-card:hover .card-icon {
+  transform: scale(1.15);
+}
+
+.card-front h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.card-front p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #666;
+}
+
+/* Back content */
+.card-back h4 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.card-back p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Animate on hover */
+.referral-card:hover {
+  transform: translateY(-8px);
+}
+
+/*
+  ----------------------------------------------
+  PROMO CODE SECTION
+  ----------------------------------------------
+*/
+.promo-code-section {
+  max-width: 700px;
+  margin: 0 auto 4rem;
+  padding: 2.5rem;
+  background: linear-gradient(135deg, #4A00E0, #8E2DE2);
+  border-radius: 20px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 1s ease forwards;
+}
+
+.promo-code-section h3 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.promo-code-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.promo-code {
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  border: 1px dashed rgba(255, 255, 255, 0.3);
+}
+
+.copy-button,
+.generate-button {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.copy-button {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+.copy-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.generate-button {
+  background: #f12711;
+  background: linear-gradient(to right, #f12711, #f5af19);
+  color: white;
+  padding: 1rem 3rem;
+  border-radius: 50px;
+}
+.generate-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.promo-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/*
+  ----------------------------------------------
+  REFERRAL STEPS
+  ----------------------------------------------
+*/
+.referral-steps {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  color: #fff;
+}
+
+.referral-steps h3 {
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  color: #fff;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  animation: fadeInDown 1s ease forwards;
+}
+
+.steps-container {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding: 0 4rem;
+}
+
+.steps-container::before {
+  content: '';
+  position: absolute;
+  top: 40px;
+  left: 80px;
+  right: 80px;
+  height: 3px;
+  background: linear-gradient(to right, #4A00E0, #8E2DE2);
+  z-index: 0;
+}
+
+.step {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.step-number {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #4A00E0, #8E2DE2);
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+  border-radius: 50%;
+  margin-bottom: 1.5rem;
+  position: relative;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.step-content {
+  max-width: 200px;
+}
+
+.step-content h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.step-content p {
+  font-size: 0.9rem;
+  color: #eee;
+  line-height: 1.4;
+}
+
+@media (max-width: 992px) {
+  .referral-cards {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .referral-main-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .steps-container {
+    flex-direction: column;
+    gap: 3rem;
+    padding: 0 2rem;
+  }
+
+  .steps-container::before {
+    display: none;
+  }
+
+  .step {
+    align-items: center;
+  }
+
+  .referral-subtitle {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .referral-main-title {
+    font-size: 2rem;
+  }
+
+  .promo-code {
+    font-size: 1.4rem;
+    padding: 0.8rem 1.5rem;
+  }
+
+  .copy-button,
+  .generate-button {
+    font-size: 0.85rem;
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* 
+  --------------------------------------------------------------------
+  OPTIONAL: For your floating phone to "shrink left" inside this section
+  Add this snippet to your floating phone CSS file:
+  --------------------------------------------------------------------
+*/
+/*
+.global-floating-phone.phone-in-referral-rewards {
+  position: fixed !important; 
+  top: 10% !important;
+  left: 2% !important;
+  right: auto !important;
+  transform: scale(0.5) !important;
+  z-index: 9999 !important;
+  transition: transform 0.8s ease, left 0.8s ease, top 0.8s ease;
+}
+*/
