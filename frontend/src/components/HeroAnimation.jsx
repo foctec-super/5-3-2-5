@@ -28,7 +28,7 @@ const HeroAnimation = () => {
             transition={{ delay: 0.1, duration: 0.8 }}
           >
             <span className="gradient-text">Marketing</span>
-            <span className="company-title">NJ.C Bandwidth</span>
+            <span className="company-title">NJ.C <span className='bandwidth'>Bandwidth</span></span>
           </motion.h1>
 
           {/* Description */}

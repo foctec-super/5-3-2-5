@@ -220,6 +220,10 @@
     padding: 1.5rem;
   }
 
+  .bandwidth {
+    display: block;
+  }
+
   .hero-title {
     font-size: clamp(1.5rem, 8vw, 2.5rem);
   }
