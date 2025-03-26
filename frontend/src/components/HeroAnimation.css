@@ -1,0 +1,230 @@
+/* 
+  -----------------------------------------------------------------
+  GENERAL HERO STRUCTURE
+  -----------------------------------------------------------------
+*/
+
+.hero-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex; 
+  align-items: center; 
+  justify-content: center; /* Centers the content horizontally */
+  font-family: sans-serif;
+}
+
+/* Parallax Background */
+.parallax-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120%; /* Slightly larger for parallax effect */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  will-change: transform;
+  animation: parallaxMove 30s linear infinite;
+}
+
+/* Moves background slightly for a subtle parallax feel */
+@keyframes parallaxMove {
+  0% {
+    transform: translateY(-2%);
+  }
+  50% {
+    transform: translateY(-3%);
+  }
+  100% {
+    transform: translateY(-2%);
+  }
+}
+
+/* Dark Overlay for added contrast */
+.dark-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.85),
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.5)
+  );
+  z-index: 1;
+}
+
+/* 
+  -----------------------------------------------------------------
+  MAIN CONTENT WRAPPER
+  -----------------------------------------------------------------
+*/
+
+.hero-content-wrapper {
+  position: relative;
+  z-index: 2; /* Above overlays/background */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Glassmorphic container for text */
+.hero-content {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  padding: 3rem;
+  max-width: 700px;
+  width: 90%;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  text-align: left; /* Left-aligned text */
+  border-radius: 12px;
+}
+
+/* 
+  -----------------------------------------------------------------
+  TEXT STYLES
+  -----------------------------------------------------------------
+*/
+
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  display: flex; 
+  flex-direction: column; 
+  gap: 0.5rem;
+}
+
+/* “Marketing” */
+.gradient-text {
+  background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #F472B6 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 1em; /* Inherit size from hero-title scaling */
+}
+
+/* “NJ.C Bandwidth” */
+.company-title {
+  color: #fff;
+  font-size: 1em; /* Inherit from hero-title scaling */
+  white-space: nowrap;
+}
+
+/* Subtitle/Description */
+.hero-description {
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  color: #ddd;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* Highlight color in description */
+.highlight {
+  color: #60A5FA;
+  font-weight: 600;
+}
+
+/* 
+  -----------------------------------------------------------------
+  CTA BUTTONS
+  -----------------------------------------------------------------
+*/
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Primary CTA */
+.primary-cta {
+  background: linear-gradient(135deg, #4A00E0 0%, #8E2DE2 100%);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
+}
+
+/* Hover states for primary CTA */
+.primary-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(138, 43, 226, 0.5);
+}
+
+/* Secondary CTA */
+.secondary-cta {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 30px;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+/* Hover states for secondary CTA */
+.secondary-cta:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* 
+  -----------------------------------------------------------------
+  RESPONSIVE DESIGN 
+  -----------------------------------------------------------------
+*/
+
+/* For tablets and below */
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 2rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+
+  .hero-description {
+    font-size: clamp(0.95rem, 4vw, 1.2rem);
+  }
+
+  .cta-buttons {
+    justify-content: center; /* If you want them centered horizontally on mobile */
+    flex-direction: column;
+  }
+
+  .primary-cta,
+  .secondary-cta {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+  .hero-content {
+    padding: 1.5rem;
+  }
+
+  .bandwidth {
+    display: block;
+  }
+
+  .hero-title {
+    font-size: clamp(1.5rem, 8vw, 2.5rem);
+  }
+}

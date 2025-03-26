@@ -1,0 +1,73 @@
+.error-boundary {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(45deg, #060820, #111827);
+  color: white;
+  text-align: center;
+  padding: 2rem;
+}
+
+.error-boundary h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg, #fff, #8E2DE2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.error-boundary p {
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin-bottom: 2rem;
+  opacity: 0.8;
+}
+
+.refresh-button {
+  padding: 0.8rem 1.5rem;
+  background: linear-gradient(45deg, #4A00E0, #8E2DE2);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 5px 15px rgba(74, 0, 224, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.refresh-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(74, 0, 224, 0.5);
+}
+
+.error-icon {
+  font-size: 5rem;
+  margin-bottom: 1.5rem;
+  color: #8E2DE2;
+}
+
+.error-details {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  border-radius: 8px;
+  max-width: 800px;
+  margin-top: 2rem;
+  text-align: left;
+  overflow: auto;
+  max-height: 300px;
+}
+
+@media (max-width: 768px) {
+  .error-boundary h2 {
+    font-size: 1.5rem;
+  }
+  
+  .error-boundary p {
+    font-size: 1rem;
+  }
+} 
