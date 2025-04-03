@@ -20,6 +20,7 @@ import RegisterPage from './components/Authentication/RegisterPage';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 import About from './components/About';
+import MarketPage from './components/Marketpage';
 
 function App() {
   const [scrollY, setScrollY] = useState(0);
@@ -189,6 +190,7 @@ function App() {
         <Route path="/" element={<MainContent />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path='/marketplace' element={<MarketPage />} />
         {/* ...other routes... */}
       </Routes>
     </Router>

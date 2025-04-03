@@ -131,7 +131,7 @@ const Navbar = () => {
           </li>
           <li className="nav-item">
             <a
-              href="#marketplace"
+              href="/marketplace"
               className={`nav-link ${
                 activeSection === "marketplace" ? "active" : ""
               }`}

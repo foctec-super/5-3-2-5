@@ -228,6 +228,8 @@ const Marketplace = () => {
           <button onClick={() => {setSearchTerm(''); setFilter('all');}}>Reset Filters</button>
         </div>
       )}
+
+      <a href='/marketplace'><button className='buy-button'>View all products</button></a>
       
       <div className="sell-cta">
         <div className="cta-content">

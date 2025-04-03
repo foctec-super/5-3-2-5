@@ -1,19 +1,21 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   FaFacebookF,
-  FaTwitter,
-  FaInstagram,
-  FaLinkedinIn,
+  FaWhatsapp,
+  FaTiktok,
+  FaFacebookSquare,
   FaMapMarkerAlt,
   FaPhoneAlt,
-  FaEnvelope
-} from 'react-icons/fa';
-import logo from '../assets/logo.png';
-import './Footer.css';
+  FaEnvelope,
+} from "react-icons/fa";
+import { FaXTwitter, FaInstagram } from "react-icons/fa6";
+import logo from "../assets/logo.png";
+import "./Footer.css";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [showMessage, setShowMessage] = useState(true);
 
   return (
     <footer className="footer">
@@ -31,8 +33,8 @@ const Footer = () => {
             </span>
           </Link>
           <p className="footer-motto">
-            Connecting Nairobi's digital future through community, rewards,
-            and trade.
+            Connecting Nairobi's digital future through community, rewards, and
+            trade.
           </p>
         </div>
 
@@ -42,13 +44,13 @@ const Footer = () => {
               <FaFacebookF />
             </a>
             <a href="#" className="social-link" aria-label="Twitter">
-              <FaTwitter />
+              <FaXTwitter />
             </a>
             <a href="#" className="social-link" aria-label="Instagram">
               <FaInstagram />
             </a>
             <a href="#" className="social-link" aria-label="LinkedIn">
-              <FaLinkedinIn />
+              <FaTiktok />
             </a>
           </div>
         </div>
@@ -103,15 +105,36 @@ const Footer = () => {
 
       {/* Bottom Section */}
       <div className="footer-bottom">
-        <p>
-          &copy; {currentYear} NJ.C Bandwidth. All rights reserved.
-        </p>
+        <p>&copy; {currentYear} NJ.C Bandwidth. All rights reserved.</p>
         <div className="footer-bottom-links">
           <Link to="/terms">Terms</Link>
           <Link to="/privacy">Privacy</Link>
           <Link to="/cookies">Cookies</Link>
         </div>
       </div>
+
+      <>
+        {/* WhatsApp Floating Button */}
+        <a
+          href="https://wa.me/254764455987" 
+          target="_blank"
+          rel="noopener noreferrer"
+          className="whatsapp-float"
+        >
+          <FaWhatsapp className="whatsapp-icon" />
+        </a>
+
+        {showMessage && (
+          <div className="whatsapp-message-container">
+            <button className="close-message" onClick={() => setShowMessage(false)}>
+              ✖
+            </button>
+            <div className="whatsapp-message">
+              <span>Need help? Chat with us</span>
+            </div>
+          </div>
+        )}
+      </>
     </footer>
   );
 };

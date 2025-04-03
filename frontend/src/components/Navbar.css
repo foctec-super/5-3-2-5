@@ -30,6 +30,7 @@
 
 .navbar-logo {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   text-decoration: none;
   color: #fff;
@@ -38,13 +39,10 @@
   transition: all 0.3s ease;
 }
 
-.navbar-logo:hover {
-  transform: scale(1.02);
-}
 
 .logo-container {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   overflow: hidden;
   margin-right: 10px;
@@ -70,6 +68,7 @@
   background-clip: text;
   color: transparent;
   font-weight: 800;
+  padding: 55px;
   letter-spacing: 0.5px;
 }
 
@@ -391,6 +390,11 @@
     padding: 0.5rem 0;
     width: 100%;
     text-align: left;
+  }
+
+  .logo-container {
+    width: 40px;
+    height: 40px;
   }
   
   .dropdown-menu {

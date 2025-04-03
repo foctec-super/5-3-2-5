@@ -51,8 +51,8 @@ const HeroAnimation = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
           >
-            <button className="primary-cta">Get Started →</button>
-            <button className="secondary-cta">Learn More</button>
+            <a href='/login'><button className="primary-cta">Get Started →</button></a>
+            <a href='#about'><button className="secondary-cta">Learn More</button></a>
           </motion.div>
         </motion.div>
       </div>
