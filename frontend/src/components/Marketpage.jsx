@@ -20,6 +20,7 @@ const products = [
     name: "Wireless Headphones",
     price: "$99.99",
     image: "https://via.placeholder.com/150",
+    rating: 4.7,
     date: "2023-05-01",
     reviews: 200,
   },
@@ -28,6 +29,7 @@ const products = [
     name: "Smart Watch",
     price: "$149.99",
     image: "https://via.placeholder.com/150",
+    rating: 4.9,
     date: "2024-03-15",
     reviews: 50,
   },
@@ -36,6 +38,7 @@ const products = [
     name: "Gaming Mouse",
     price: "$49.99",
     image: "https://via.placeholder.com/150",
+    rating: 4.5,
     date: "2025-11-22",
     reviews: 100,
   },
@@ -44,6 +47,7 @@ const products = [
     name: "Mechanical Keyboard",
     price: "$79.99",
     image: "https://via.placeholder.com/150",
+    rating: 4.3,
     date: "2025-01-31",
     reviews: 150,
   },
@@ -93,6 +97,32 @@ const MarketPage = () => {
       />
     );
   };
+
+  const StarRating = ({ rating }) => {
+    console.log(rating);
+    const fullStars = Math.floor(rating);
+    const halfStar = rating % 1 >= 0.5;
+    const stars = [];
+  
+    for (let i = 0; i < fullStars; i++) {
+      stars.push("★");
+    }
+  
+    if (halfStar) {
+      stars.push("☆");
+    }
+  
+    while (stars.length < 5) {
+      stars.push("✩");
+    }
+  
+    return (
+      <div style={{ color: "#f5a623", fontSize: "1.1rem" }}>
+        {stars.join(" ")}({rating})
+      </div>
+    );
+  };
+  
   
 
   useEffect(() => {
@@ -109,7 +139,7 @@ const MarketPage = () => {
       <SidebarToggle />
 
       <Text fontSize="2xl" fontWeight="bold" mb={4} className="market-header">
-        Marketplace
+        Black Market
       </Text>
 
       <Box className="desktop-links">
@@ -175,7 +205,7 @@ const MarketPage = () => {
       <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
       <Box className="market-hero">
         <Text fontSize="2xl" fontWeight="bold" className="hero-header">
-          Welcome to NJC Market Platform
+          Welcome to NJC Black Market Platform
         </Text>
       </Box>
 
@@ -197,6 +227,7 @@ const MarketPage = () => {
             >
               <Image src={product.image} alt={product.name} mb={3} />
               <Text fontWeight="bold">{product.name}</Text>
+              <StarRating rating={product.rating} />
               <Text color="gray.500" mb={2}>
                 {product.price}
               </Text>

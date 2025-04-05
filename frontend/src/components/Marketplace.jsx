@@ -229,7 +229,7 @@ const Marketplace = () => {
         </div>
       )}
 
-      <a href='/marketplace'><button className='buy-button'>View all products</button></a>
+      <a href='/marketplace'><button className='buy-button'>View all categories</button></a>
       
       <div className="sell-cta">
         <div className="cta-content">
