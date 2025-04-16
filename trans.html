@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction History</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      margin: 0;
+      padding: 20px;
+    }
+    .header {
+      background-color: #005f99;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-size: 24px;
+    }
+    .transaction {
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #1e90ff;
+      border-radius: 8px;
+      background-color: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .transaction:nth-child(odd) {
+      background-color: #e6f7ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">Transaction History</div>
+  <div class="transaction">Paid $50 to John</div>
+  <div class="transaction">Received $100 from Alice</div>
+  <div class="transaction">Paid $20 for groceries</div>
+</body>
+</html>

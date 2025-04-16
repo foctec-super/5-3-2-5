@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f8ff;
+      color: black;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .header {
+      background-color: #005f99;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-size: 24px;
+    }
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding: 20px;
+    }
+    .card {
+      background-color: #1e90ff;
+      color: white;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+    }
+    .card:hover {
+      background-color: #0063cc;
+    }
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      z-index: 1000;
+    }
+    .modal.active {
+      display: block;
+    }
+    .modal input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .modal button {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #005f99;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+    .overlay.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">Bank Dashboard</div>
+  <div class="dashboard">
+    <a href="balance.html" class="card">Balance</a>
+    <a href="transactions.html" class="card">Transactions</a>
+    <a href="trans.html" class="card">Transaction History</a>
+    <div class="card" onclick="openModal()">Send Money</div>
+  </div>
+
+  <!-- Modal -->
+  <div class="overlay" id="overlay"></div>
+  <div class="modal" id="modal">
+    <p>Enter Recipient ID (23 characters):</p>
+    <input type="text" id="recipientId" maxlength="23" />
+    <button onclick="submitRecipient()">Submit</button>
+    <button onclick="closeModal()">Close</button>
+  </div>
+
+  <script>
+    const modal = document.getElementById('modal');
+    const overlay = document.getElementById('overlay');
+
+    function openModal() {
+      modal.classList.add('active');
+      overlay.classList.add('active');
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+      overlay.classList.remove('active');
+    }
+
+    function submitRecipient() {
+      const recipientId = document.getElementById('recipientId').value;
+      if (recipientId.length === 23) {
+        alert("Recipient ID submitted: " + recipientId);
+        closeModal();
+      } else {
+        alert("Please enter exactly 23 characters!");
+      }
+    }
+  </script>
+</body>
+</html>
