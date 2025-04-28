@@ -97,7 +97,7 @@ const Navbar = () => {
         <ul className={`nav-menu ${menuOpen ? "active" : ""}`}>
           <li className="nav-item">
             <a
-              href="#home"
+              href="/"
               className={`nav-link ${activeSection === "home" ? "active" : ""}`}
               onClick={closeMenu}
             >

@@ -1,3 +1,9 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 .marketnav {
   position: fixed;
   top: 0;
@@ -9,16 +15,17 @@
   align-items: center;
   padding: 10px 20px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 10;
+  z-index: 100;
 }
 
 .market-header {
-  font-size: 2.5rem;
+  font-size: 2rem!important;
   background: linear-gradient(90deg, #6f42c1, #e83e8c);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 0.5rem;
+  margin-bottom: 5px;
+  padding-left: 4rem;
 }
 
 .desktop-links {
@@ -91,31 +98,6 @@
   text-align: center;
 }
 
-.sidebar-toggle {
-  position: relative;
-  top: 70px;
-  left: 0;
-  margin: auto 10px;
-  background: none;
-  border: none;
-  font-size: 1.6rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-
-.sidebar-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 99;
-}
-
 .desktop-links .search {
   display: flex;
   align-items: center;
@@ -142,8 +124,12 @@
   padding: 20px;
 }
 
-.market-hero {
+.market-body {
   margin-top: 120px;
+  padding-left: 4rem;
+}
+
+.market-hero {
   left: 0;
   width: 100%;
   display: flex;

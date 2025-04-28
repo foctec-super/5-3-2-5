@@ -81,6 +81,33 @@ const sampleProducts = [
   }
 ];
 
+// Star rating component
+const StarRating = ({ rating }) => {
+  const fullStars = Math.floor(rating);
+  const hasHalfStar = rating % 1 >= 0.5;
+  
+  return (
+    <div className="star-rating">
+      {[...Array(5)].map((_, i) => (
+        <span key={i} className={
+          i < fullStars 
+            ? "star full-star" 
+            : i === fullStars && hasHalfStar 
+              ? "star half-star" 
+              : "star empty-star"
+        }>
+          {i < fullStars 
+            ? "★" 
+            : i === fullStars && hasHalfStar 
+              ? "★" 
+              : "☆"}
+        </span>
+      ))}
+      <span className="rating-number">({rating})</span>
+    </div>
+  );
+};
+
 const Marketplace = () => {
   const [filter, setFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
@@ -114,32 +141,7 @@ const Marketplace = () => {
     return matchesCategory && matchesSearch;
   });
   
-  // Star rating component
-  const StarRating = ({ rating }) => {
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 >= 0.5;
-    
-    return (
-      <div className="star-rating">
-        {[...Array(5)].map((_, i) => (
-          <span key={i} className={
-            i < fullStars 
-              ? "star full-star" 
-              : i === fullStars && hasHalfStar 
-                ? "star half-star" 
-                : "star empty-star"
-          }>
-            {i < fullStars 
-              ? "★" 
-              : i === fullStars && hasHalfStar 
-                ? "★" 
-                : "☆"}
-          </span>
-        ))}
-        <span className="rating-number">({rating})</span>
-      </div>
-    );
-  };
+  
 
   return (
     <div className="marketplace-container">
@@ -240,7 +242,7 @@ const Marketplace = () => {
             <li>✓ Reach engaged audience</li>
             <li>✓ Accept NJ.C Points</li>
           </ul>
-          <button className="sell-button">Start Selling</button>
+          <a href='/seller-reg'><button className="sell-button">Start Selling</button></a>
         </div>
         <div className="cta-image">
           <div className="image-placeholder"></div>

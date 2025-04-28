@@ -4,7 +4,6 @@ import {
   FaFacebookF,
   FaWhatsapp,
   FaTiktok,
-  FaFacebookSquare,
   FaMapMarkerAlt,
   FaPhoneAlt,
   FaEnvelope,

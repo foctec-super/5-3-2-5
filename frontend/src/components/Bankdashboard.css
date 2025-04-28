@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.body {
+  background-color: #878786;
+}
+
+.dash-header {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  top: 0 !important;
+  width: 100%;
+  z-index: 2;
+}
+
+.nav-text {
+  margin-left: 4rem;
+}
+
+.user {
+  margin: auto 0;
+}
+
+.balance {
+  color: white;
+  margin-top: 20px;
+}
+
+.recipientInput {
+  border: 1px solid blue;
+}
+
+.close-button {
+  font-size: 19px;
+  text-align: center;
+  padding: 7px 15px;
+  color: white;
+  margin: 5px 0 2px 8px;
+  background-color: rgb(204, 43, 43);
+  border-radius: 8px;
+}
+
+.submit-btn {
+  font-size: 19px;
+  text-align: center;
+  padding: 7px 15px;
+  color: white;
+  margin: 5px 4px 2px 0;
+  background-color: blue;
+  border-radius: 8px;
+}
+
+.bank-hero {
+  font-family: sans-serif;
+  background-color: #39393b;
+  padding: 12px 0 8px 70px;
+  color: white;
+}
+.bank-hero span {
+  color: #cfb006;
+  font-size: 2rem;
+  letter-spacing: 4px;
+}
+.bank-intro {
+  color: #e37e12;
+}
+
+.bank-content {
+  padding: 12px 0 8px 70px; 
+}
+
+.bank-body {
+  background-color: #e37e12;
+  padding: 20px 0 18px 70px;
+}
+
+.bank-footer {
+  padding: 20px 0 3px 70px;
+}
+
+.footer-column .bank-footer {
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: center;
+  justify-content: center;
+}

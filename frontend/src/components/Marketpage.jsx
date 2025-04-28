@@ -1,18 +1,12 @@
-import { Box, Grid, Image, Text, Button, IconButton } from "@chakra-ui/react";
+import { Box, Grid, Image, Text } from "@chakra-ui/react";
 import Sidebar from "./Sidebar";
 import React, { useState, useEffect } from "react";
 import "./Marketpage.css";
-import { FiMenu } from "react-icons/fi";
 import { FaHome } from "react-icons/fa";
 import { IoMdCart } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { create } from "zustand";
 
-// ✅ Zustand store (Define this OUTSIDE the component)
-const useSidebarStore = create((set) => ({
-  isOpen: false,
-  toggleSidebar: () => set((state) => ({ isOpen: !state.isOpen })),
-}));
+
 
 const products = [
   {
@@ -54,17 +48,11 @@ const products = [
 ];
 
 const MarketPage = () => {
-  const { isOpen, toggleSidebar } = useSidebarStore();
-
   const [showSearchPopup, setShowSearchPopup] = useState(false);
   const [cartCount, setCartCount] = useState(3);
   const [sortedProducts, setSortedProducts] = useState(products);
   const [sortOption, setSortOption] = useState("");
   const [role, setRole] = useState("Buyer"); // Default role is Buyer
-
-  const toggleRole = () => {
-    setRole(role === "Buyer" ? "Seller" : "Buyer");
-  };
 
   const handleSort = (option) => {
     let sortedArray = [...products];
@@ -82,48 +70,29 @@ const MarketPage = () => {
     setSortedProducts(sortedArray);
   };
 
-  const SidebarToggle = () => {
-    const { toggleSidebar } = useSidebarStore();
-  
-    return (
-      <IconButton
-        aria-label="Open Sidebar"
-        icon={<FiMenu />}
-        onClick={toggleSidebar}
-        top={0}
-        left={0}
-        zIndex={1000}
-        className="sidebar-toggle" 
-      />
-    );
-  };
-
   const StarRating = ({ rating }) => {
-    console.log(rating);
     const fullStars = Math.floor(rating);
     const halfStar = rating % 1 >= 0.5;
     const stars = [];
-  
+
     for (let i = 0; i < fullStars; i++) {
       stars.push("★");
     }
-  
+
     if (halfStar) {
       stars.push("☆");
     }
-  
+
     while (stars.length < 5) {
       stars.push("✩");
     }
-  
+
     return (
       <div style={{ color: "#f5a623", fontSize: "1.1rem" }}>
         {stars.join(" ")}({rating})
       </div>
     );
   };
-  
-  
 
   useEffect(() => {
     const handleClose = (e) => {
@@ -135,36 +104,32 @@ const MarketPage = () => {
 
   return (
     <>
-    <Box className="marketnav">
-      <SidebarToggle />
+      <Box className="marketnav">
+        <Sidebar />
+        
+        <Text fontSize="2xl" fontWeight="bold" mb={4} className="market-header">
+          Black Market
+        </Text>
 
-      <Text fontSize="2xl" fontWeight="bold" mb={4} className="market-header">
-        Black Market
-      </Text>
+        <Box className="desktop-links">
 
-      <Box className="desktop-links">
-        <Link to="/" className="home-link">
-          <FaHome size={22}/>
-        </Link>
+          <div className="cart-icon">
+            <Link to="/cart" className="cart-link">
+              <IoMdCart className="cart-svg" size={22} />
+              {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+            </Link>
+          </div>
 
-        <div className="cart-icon">
-          <Link to="/cart" className="cart-link">
-            <IoMdCart className="cart-svg" size={22} />
-            {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
-          </Link>
-        </div>
-
-        <div className={`search ${showSearchPopup ? "active" : ""}`}>
-          <button
-            className="search-img"
-            onClick={() => setShowSearchPopup(true)}
-          >
-            🔍
-          </button>
-        </div>
+          <div className={`search ${showSearchPopup ? "active" : ""}`}>
+            <button
+              className="search-img"
+              onClick={() => setShowSearchPopup(true)}
+            >
+              🔍
+            </button>
+          </div>
+        </Box>
       </Box>
-      </Box>
-
 
       <Box className="mobile">
         <div className={`search ${showSearchPopup ? "active" : ""}`}>
@@ -202,62 +167,63 @@ const MarketPage = () => {
         </>
       )}
 
-      <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
-      <Box className="market-hero">
-        <Text fontSize="2xl" fontWeight="bold" className="hero-header">
-          Welcome to NJC Black Market Platform
-        </Text>
-      </Box>
-
-      <Box className="market-content" p={5}>
-        <Grid
-          templateColumns="repeat(auto-fit, minmax(200px, 1fr))"
-          gap={6}
-          className="product-grid"
-        >
-          {sortedProducts.map((product) => (
-            <Box
-              key={product.id}
-              className="product-card"
-              borderWidth="1px"
-              borderRadius="lg"
-              overflow="hidden"
-              p={3}
-              textAlign="center"
-            >
-              <Image src={product.image} alt={product.name} mb={3} />
-              <Text fontWeight="bold">{product.name}</Text>
-              <StarRating rating={product.rating} />
-              <Text color="gray.500" mb={2}>
-                {product.price}
-              </Text>
-              <Link to={`/product/${product.id}`}>
-                <button className="add-button">Add to cart 🛒</button>
-              </Link>
-            </Box>
-          ))}
-        </Grid>
-
-        {/* No Products Found Message */}
-        {products.length === 0 && (
-          <Text
-            fontSize={"xl"}
-            fontWeight={"bold"}
-            textAlign={"center"}
-            color={"gray"}
-          >
-            No Product found 😢 {""}
-            <Link href="/create">
-              <Text
-                as={"span"}
-                color={"blue"}
-                _hover={{ textDecoration: "underline" }}
-              >
-                Create a Product
-              </Text>
-            </Link>
+      <Box className="market-body">
+        <Box className="market-hero">
+          <Text fontSize="2xl" fontWeight="bold" className="hero-header">
+            Welcome to NJC Black Market Platform
           </Text>
-        )}
+        </Box>
+
+        <Box className="market-content" p={5}>
+          <Grid
+            templateColumns="repeat(auto-fit, minmax(200px, 1fr))"
+            gap={6}
+            className="product-grid"
+          >
+            {sortedProducts.map((product) => (
+              <Box
+                key={product.id}
+                className="product-card"
+                borderWidth="1px"
+                borderRadius="lg"
+                overflow="hidden"
+                p={3}
+                textAlign="center"
+              >
+                <Image src={product.image} alt={product.name} mb={3} />
+                <Text fontWeight="bold">{product.name}</Text>
+                <StarRating rating={product.rating} />
+                <Text color="gray.500" mb={2}>
+                  {product.price}
+                </Text>
+                <Link to={`/product/${product.id}`}>
+                  <button className="add-button">Add to cart 🛒</button>
+                </Link>
+              </Box>
+            ))}
+          </Grid>
+
+          {/* No Products Found Message */}
+          {products.length === 0 && (
+            <Text
+              fontSize={"xl"}
+              fontWeight={"bold"}
+              textAlign={"center"}
+              color={"gray"}
+            >
+              No Product found 😢 {""}
+              <Link href="/create">
+                <Text
+                  as={"span"}
+                  color={"blue"}
+                  _hover={{ textDecoration: "underline" }}
+                >
+                  Create a Product
+                </Text>
+              </Link>
+            </Text>
+          )}
+        </Box>
       </Box>
     </>
   );

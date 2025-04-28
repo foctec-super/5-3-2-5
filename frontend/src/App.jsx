@@ -21,6 +21,10 @@ import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 import About from './components/About';
 import MarketPage from './components/Marketpage';
+import SellerRegistrationForm from './components/SellerRegistration';
+import BankDashboard from './components/Bankdashboard';
+import TransactionHistoryPage from './components/TransactionhistoryPage';
+import TransactionsPage from './components/TransactionPage';
 
 function App() {
   const [scrollY, setScrollY] = useState(0);
@@ -191,6 +195,10 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path='/marketplace' element={<MarketPage />} />
+        <Route path='/seller-reg' element={<SellerRegistrationForm />} />
+        <Route path='/dashboard' element={<BankDashboard />} />
+        <Route path='/transaction-history' element={<TransactionHistoryPage />} />
+        <Route path='/transactions' element={<TransactionsPage />} />
         {/* ...other routes... */}
       </Routes>
     </Router>

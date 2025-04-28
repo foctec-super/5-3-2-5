@@ -1,33 +1,42 @@
+import React, { useState } from "react";
 import {
-  Text,
   Box,
+  IconButton,
   VStack,
   HStack,
+  Text,
+  Flex,
+  Button,
   Collapse,
-  IconButton,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
-  Button,
-  Flex,
+  useDisclosure,
+  useBreakpointValue,
 } from "@chakra-ui/react";
-import { FiX, FiChevronDown } from "react-icons/fi";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { FaToggleOff, FaToggleOn } from "react-icons/fa";
-import { FaSortAmountDown } from "react-icons/fa";
-import { IoFastFood } from "react-icons/io5";
+import {
+  FaBars,
+  FaTimes,
+  FaHome,
+  FaSortAmountDown,
+  FaToggleOff,
+  FaToggleOn,
+} from "react-icons/fa";
+import { LuUsers } from "react-icons/lu";
+import { FiChevronDown } from "react-icons/fi";
 import { AiOutlineProduct } from "react-icons/ai";
 import { RiCustomerServiceLine } from "react-icons/ri";
-import { LuUsers } from "react-icons/lu";
-import { FaHome } from "react-icons/fa";
-import { useState } from "react";
-import "./Sidebar.css";
+import { IoFastFood } from "react-icons/io5";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
-const Sidebar = ({ isOpen, toggleSidebar }) => {
-  const currentYear = new Date().getFullYear();
+const Sidebar = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isHovered, setIsHovered] = useState(false);
   const [openCategory, setOpenCategory] = useState(null);
+  const isMobile = useBreakpointValue({ base: true, md: false });
+  const currentYear = new Date().getFullYear();
   const [role, setRole] = useState("Buyer"); // Default role is Buyer
   const toggleRole = () => {
     setRole(role === "Buyer" ? "Seller" : "Buyer");
@@ -49,163 +58,244 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     setSortedProducts(sortedArray);
   };
 
+  const isExpanded = isMobile ? isOpen : isHovered;
+
   const toggleCategory = (category) => {
     setOpenCategory(openCategory === category ? null : category);
   };
 
   return (
-    <Box
-      position={{ base: "fixed", md: "relative" }}
-      left={isOpen ? "0" : "-250px"}
-      h="100vh"
-      w="200px"
-      p={4}
-      transition="0.3s ease-in-out"
-      className="sidebar"
-      z-index={20}
-    >
-      {/* Close Button (Only for Mobile) */}
-      <IconButton
-        aria-label="Close Sidebar"
-        icon={<FiX />}
-        onClick={toggleSidebar}
-        mb={4}
-        display={{ base: "block", md: "none" }}
-        className="close-button"
-      />
+    <>
+      {/* Toggle button for mobile */}
+      {isMobile && (
+        <IconButton
+          aria-label="Toggle Sidebar"
+          icon={isOpen ? <FaTimes /> : <FaBars />}
+          onClick={isOpen ? onClose : onOpen}
+          position="fixed"
+          top="1rem"
+          left="0.7rem"
+          zIndex="1100"
+          background="white"
+        />
+      )}
 
-      <VStack align="start" spacing={4}>
-        {/* Navigation Links (Mobile Only) */}
-        <Button
-          as={Link}
-          to="/"
-          variant="ghost"
-          display={{ base: "block", md: "none" }}
-          margin={"8px 10px"}
+      <Box
+        position="fixed"
+        left="0"
+        top="0"
+        height="100vh"
+        backgroundColor="#f8f9fa"
+        color="white"
+        width={isExpanded ? "220px" : "60px"}
+        transition="width 0.3s ease"
+        onMouseEnter={!isMobile ? () => setIsHovered(true) : undefined}
+        onMouseLeave={!isMobile ? () => setIsHovered(false) : undefined}
+        zIndex="0"
+        boxShadow="lg"
+        p={4}
+      >
+        <VStack
+          align={isExpanded ? "flex-start" : "center"}
+          spacing={6}
+          mt="70px"
         >
-          <Flex justify={"center"} align={"center"}>
-            <FaHome style={{ marginRight: "5px" }} />
-            Home
-          </Flex>
-        </Button>
-        <HStack spacing={2} className="role-toggle" margin={"8px 10px"}>
-          <LuUsers style={{ marginRight: "3px" }} />
-          <Text fontSize="lg">{role}</Text>
-          <motion.div
-            key={role}
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
+          {/* Home Link */}
+          <Button
+            as={Link}
+            to="/"
+            variant="ghost"
+            width="100%"
+            justifyContent={isExpanded ? "flex-start" : "center"}
+            leftIcon={
+              isExpanded ? (
+                <FaHome size={25} color="black" />
+              ) : (
+                <FaHome size={28} color="#000000" />
+              )
+            }
           >
-            <IconButton
-              icon={
-                role === "Buyer" ? (
-                  <FaToggleOff size={"30px"} />
-                ) : (
-                  <FaToggleOn size={"30px"} />
-                )
-              }
-              aria-label="Toggle Role"
-              onClick={toggleRole}
-              fontSize="24px"
-              bg="transparent"
-              _hover={{ bg: "gray.200" }}
-            />
-          </motion.div>
-        </HStack>
+            {isExpanded && "Home"}
+          </Button>
 
-        {/* Sort by Dropdown */}
-        <Box margin={"8px 10px"}>
-          <Menu>
-            <MenuButton
-              as={Button}
-              leftIcon={<FaSortAmountDown />}
-              rightIcon={<FiChevronDown />}
-            >
-              Sort By
-            </MenuButton>
-            <MenuList className="menu-list">
-              <MenuItem
-                className="menu-item"
-                onClick={() => handleSort("date")}
+          {/* Role Toggle */}
+          <HStack
+            spacing={2}
+            pl={isExpanded ? 4 : 0}
+            width="100%"
+            justify={isExpanded ? "flex-start" : "center"}
+          >
+            <LuUsers size={isExpanded ? 25 : 28} color="black" />
+            {isExpanded && (
+              <>
+                <Text fontSize="lg" color={"black"}>
+                  {role}
+                </Text>
+                <motion.div
+                  key={role}
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                >
+                  <IconButton
+                    icon={
+                      role === "Buyer" ? (
+                        <FaToggleOff size="30px" />
+                      ) : (
+                        <FaToggleOn size="30px" />
+                      )
+                    }
+                    aria-label="Toggle Role"
+                    onClick={toggleRole}
+                    fontSize="24px"
+                    bg="transparent"
+                    _hover={{ bg: "gray.200" }}
+                  />
+                </motion.div>
+              </>
+            )}
+          </HStack>
+
+          {/* Sort By Dropdown */}
+          {isExpanded && (
+            <Box width="100%">
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  leftIcon={
+                    isExpanded ? (
+                      <FaSortAmountDown size={25} color="black" />
+                    ) : (
+                      <FaSortAmountDown size={28} color="#000000" /> // Force color
+                    )
+                  }
+                  rightIcon={<FiChevronDown />}
+                  width="100%"
+                  justifyContent="flex-start"
+                >
+                  Sort By
+                </MenuButton>
+                <MenuList>
+                  <MenuItem onClick={() => handleSort("date")} color={"black"}>
+                    Arrival Date
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => handleSort("reviews")}
+                    color={"black"}
+                  >
+                    Reviews
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+            </Box>
+          )}
+
+          {/* Divider */}
+          {isExpanded && (
+            <Box w="100%" textAlign="center" fontSize="sm" color="gray.400">
+              Select categories by:
+            </Box>
+          )}
+
+          {/* Products Section */}
+          <Button
+            variant="ghost"
+            width="100%"
+            justifyContent={isExpanded ? "flex-start" : "center"}
+            leftIcon={
+              isExpanded ? (
+                <AiOutlineProduct size={25} color="black" />
+              ) : (
+                <AiOutlineProduct size={28} color="#000000" /> // Force color
+              )
+            }
+            onClick={() => toggleCategory("products")}
+          >
+            {isExpanded && "Products"}
+          </Button>
+          <Collapse in={openCategory === "products"}>
+            <VStack pl={4} align="start">
+              <Button variant="link">Vehicles</Button>
+              <Button variant="link">Accessories</Button>
+              <Button variant="link">Clothing</Button>
+              <Button variant="link">Home Hardware</Button>
+            </VStack>
+          </Collapse>
+
+          {/* Services Section */}
+          <Button
+            variant="ghost"
+            width="100%"
+            justifyContent={isExpanded ? "flex-start" : "center"}
+            leftIcon={
+              isExpanded ? (
+                <RiCustomerServiceLine size={25} color="black" />
+              ) : (
+                <RiCustomerServiceLine size={28} color="#000000" /> // Force color
+              )
+            }
+            onClick={() => toggleCategory("services")}
+          >
+            {isExpanded && "Services"}
+          </Button>
+          <Collapse in={openCategory === "services"}>
+            <VStack pl={4} align="start">
+              <Button variant="link">Private Doctors</Button>
+              <Button variant="link">Project Managers</Button>
+              <Button variant="link">Private Drivers</Button>
+              <Button variant="link">Web Developers</Button>
+            </VStack>
+          </Collapse>
+
+          {/* Food Section */}
+          <Button
+            variant="ghost"
+            width="100%"
+            justifyContent={isExpanded ? "flex-start" : "center"}
+            leftIcon={
+              isExpanded ? (
+                <IoFastFood size={25} color="black" />
+              ) : (
+                <IoFastFood size={28} color="#000000" /> // Force color
+              )
+            }
+            onClick={() => toggleCategory("food")}
+          >
+            {isExpanded && "Food"}
+          </Button>
+          <Collapse in={openCategory === "food"}>
+            <VStack pl={4} align="start">
+              <Button variant="link">Food Delivery</Button>
+              <Button variant="link">Food Stuffs</Button>
+              <Button variant="link">Groceries</Button>
+            </VStack>
+          </Collapse>
+
+          {/* Footer Copyright */}
+          <Box
+            width="100%"
+            textAlign="center"
+            py="4"
+            fontSize="sm"
+            borderTop="1px solid #4a4a4a"
+          >
+            {isExpanded ? (
+              <Box
+                pt="3"
+                fontSize="sm"
+                color="gray.400"
+                textAlign="center"
+                w="100%"
               >
-                Arrival Date
-              </MenuItem>
-              <MenuItem
-                className="menu-item"
-                onClick={() => handleSort("reviews")}
-              >
-                Reviews
-              </MenuItem>
-            </MenuList>
-          </Menu>
-        </Box>
-
-        <div className="social-divider">
-          <span>Select categories by:</span>
-        </div>
-
-        {/* Products Section */}
-        <Button
-          leftIcon={<AiOutlineProduct size={25} />}
-          onClick={() => toggleCategory("products")}
-          margin={"8px 10px"}
-          variant="ghost"
-          className="product"
-        >
-          Products
-        </Button>
-        <Collapse in={openCategory === "products"}>
-          <VStack pl={4} align="start">
-            <Button variant="link">Vehicles</Button>
-            <Button variant="link">Accessories</Button>
-            <Button variant="link">Clothing</Button>
-            <Button variant="link">Home Hardware</Button>
-          </VStack>
-        </Collapse>
-
-        {/* Services Section */}
-        <Button
-          leftIcon={<RiCustomerServiceLine size={25} />}
-          onClick={() => toggleCategory("services")}
-          margin={"8px 10px"}
-          variant="ghost"
-          className="services"
-        >
-          Services
-        </Button>
-        <Collapse in={openCategory === "services"}>
-          <VStack pl={4} align="start">
-            <Button variant="link">Private Doctors</Button>
-            <Button variant="link">Project Managers</Button>
-            <Button variant="link">Private Drivers</Button>
-            <Button variant="link">Web developers</Button>
-          </VStack>
-        </Collapse>
-
-        {/* Food Section */}
-        <Button
-          leftIcon={<IoFastFood size={25} />}
-          onClick={() => toggleCategory("services")}
-          margin={"8px 10px"}
-          variant="ghost"
-          className="services"
-        >
-          Food
-        </Button>
-        <Collapse in={openCategory === "services"}>
-          <VStack pl={4} align="start">
-            <Button variant="link">Food delivery</Button>
-            <Button variant="link">Food stuffs</Button>
-            <Button variant="link">Groceries</Button>
-          </VStack>
-        </Collapse>
-
-        <div className="copyright">
-          <p>&copy; {currentYear} NJ.C Bandwidth. All rights reserved.</p>
-        </div>
-      </VStack>
-    </Box>
+                &copy; {currentYear} NJ.C Bandwidth. All rights reserved.
+              </Box>
+            ) : (
+              <Text fontSize="xs">&copy;</Text>
+            )}
+          </Box>
+        </VStack>
+      </Box>
+    </>
   );
 };
 

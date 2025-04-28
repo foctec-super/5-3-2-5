@@ -1,0 +1,69 @@
+body {
+  background-color: #040542;
+}
+
+.sell-form {
+  max-width: 400px;
+  padding: 2.5rem;
+  margin: 90px auto 0;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  align-items: center;
+  justify-items: center;
+  background-color: #040542;
+  box-shadow: 0 0 8px black;
+}
+
+.sell-content {
+  padding: 0;
+}
+
+.sell-header {
+  margin: 6px 0 19px;
+}
+
+.dropdown {
+  width: 100%;
+  padding: 3px;
+}
+.dropdown option {
+  color: black;
+}
+
+.select {
+  margin: 10px 0;
+}
+
+.description {
+  margin: 10px 0;
+}
+
+.checkbox {
+  display: flex;
+}
+
+.checkbox input {
+  width: 5%;
+  margin-right: 9px;
+}
+
+.submit-button {
+  background-color: #6f42c1;
+  color: white;
+  width: 100%;
+  margin: 20px 0 5px;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.submit-button:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
